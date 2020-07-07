@@ -119,6 +119,8 @@ namespace Microsoft.WindowsAzure.Commands.Common
 
         private TelemetryConfiguration telemetryConfiguration;
 
+        private TelemetryClient defaultTelemetryClient;
+
         public MetricHelper(INetworkHelper network)
         {
             _networkHelper = network;
@@ -130,6 +132,7 @@ namespace Microsoft.WindowsAzure.Commands.Common
                 telemetryConfiguration.DisableTelemetry = true;
             }
 #endif
+            defaultTelemetryClient = new TelemetryClient(telemetryConfiguration);
         }
 
         /// <summary>
@@ -162,7 +165,7 @@ namespace Microsoft.WindowsAzure.Commands.Common
 
         public void AddDefaultTelemetryClient()
         {
-            AddTelemetryClient(new TelemetryClient(telemetryConfiguration));
+            AddTelemetryClient(defaultTelemetryClient);
         }
 
 
